@@ -6,7 +6,7 @@ using OpenQA.Selenium;
 namespace IntegrationsTestsFramework.TestCases
 {
     [TestFixture]
-    class AddItemToDoList : TestCase
+    public class AddItemToDoList : TestCase
     {
         [Test]
         public void TestAddItemToDoList()
@@ -15,11 +15,11 @@ namespace IntegrationsTestsFramework.TestCases
 
             Browser.NavigateTo(toDoListPage);
 
-            CollectionElementsHandler activitiesLabelsHandler = new CollectionElementsHandler(Browser, toDoListPage.ActivitiesLabelsByLocator);
+            CollectionElementsHandler activitiesLabelsHandler = new CollectionElementsHandler(Browser.WebDriver, toDoListPage.ActivitiesLabelsByLocator);
 
             activitiesLabelsHandler.WaitForVisible(10);
 
-            SingleElementHandler newActivityTextboxHandler = new SingleElementHandler(Browser, toDoListPage.NewActivityTextboxByLocator);
+            SingleElementHandler newActivityTextboxHandler = new SingleElementHandler(Browser.WebDriver, toDoListPage.NewActivityTextboxByLocator);
 
             string activityToAdd = "Read Web Calendar Handler article";
 

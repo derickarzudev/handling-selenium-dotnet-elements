@@ -13,9 +13,9 @@ namespace IntegrationsTestsFramework.ElementHandlers
     {
         private int Count { get; set; }
 
-        public ReadOnlyCollection<IWebElement> Elements => Browser.WebDriver.FindElements(ByLocator);
+        public ReadOnlyCollection<IWebElement> Elements => WebDriver.FindElements(ByLocator);
 
-        public CollectionElementsHandler(Browser browser, By byLocator) : base(browser, byLocator) { }
+        public CollectionElementsHandler(IWebDriver webDriver, By byLocator) : base(webDriver, byLocator) { }
 
         public void SaveCount()
         {
@@ -24,32 +24,32 @@ namespace IntegrationsTestsFramework.ElementHandlers
 
         public override void WaitForVisible(int timeoutSeconds)
         {
-            WebDriverWait wait = new WebDriverWait(Browser.WebDriver, TimeSpan.FromSeconds(timeoutSeconds));
+            WebDriverWait wait = new WebDriverWait(WebDriver, TimeSpan.FromSeconds(timeoutSeconds));
             wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(ByLocator));
         }
 
         public void WaitForVisibleElement(int timeoutSeconds, int index)
         {
-            WebDriverWait wait = new WebDriverWait(Browser.WebDriver, TimeSpan.FromSeconds(timeoutSeconds));
+            WebDriverWait wait = new WebDriverWait(WebDriver, TimeSpan.FromSeconds(timeoutSeconds));
             wait.Until(ExpectedConditions.PresenceOfAllElementsLocatedBy(ByLocator));
             wait.Until(driver => driver.FindElements(ByLocator)[index].Displayed);
         }
 
         public override void WaitForInvisible(int timeoutSeconds)
         {
-            WebDriverWait wait = new WebDriverWait(Browser.WebDriver, TimeSpan.FromSeconds(timeoutSeconds));
+            WebDriverWait wait = new WebDriverWait(WebDriver, TimeSpan.FromSeconds(timeoutSeconds));
             wait.Until(driver => (ExpectedConditions.VisibilityOfAllElementsLocatedBy(ByLocator))(driver) == null);
         }
 
         public void WaitForSizeChange(int timeoutSeconds)
         {
-            WebDriverWait wait = new WebDriverWait(Browser.WebDriver, TimeSpan.FromSeconds(timeoutSeconds));
+            WebDriverWait wait = new WebDriverWait(WebDriver, TimeSpan.FromSeconds(timeoutSeconds));
             wait.Until(driver => driver.FindElements(ByLocator).Count != Count);
         }
 
         public void Hover(int index)
         {
-            Actions action = new Actions(Browser.WebDriver);
+            Actions action = new Actions(WebDriver);
             action.MoveToElement(Elements[index]).Perform();
         }
 

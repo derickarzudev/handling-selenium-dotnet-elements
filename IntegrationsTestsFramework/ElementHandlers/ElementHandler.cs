@@ -4,12 +4,12 @@ namespace IntegrationsTestsFramework.ElementHandlers
 {
     public abstract class ElementHandler
     {
-        protected readonly Browser Browser;
+        protected readonly IWebDriver WebDriver;
         protected readonly By ByLocator;
 
-        public ElementHandler(Browser browser, By byLocator)
+        public ElementHandler(IWebDriver webDriver, By byLocator)
         {
-            Browser = browser;
+            WebDriver = webDriver;
             ByLocator = byLocator;
         }
 

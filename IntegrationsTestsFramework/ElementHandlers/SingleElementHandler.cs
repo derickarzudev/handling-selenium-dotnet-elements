@@ -6,27 +6,27 @@ using System;
 
 namespace IntegrationsTestsFramework.ElementHandlers
 {
-    class SingleElementHandler : ElementHandler
+    public class SingleElementHandler : ElementHandler
     {
-        public IWebElement Element => Browser.WebDriver.FindElement(ByLocator);
+        public IWebElement Element => WebDriver.FindElement(ByLocator);
 
-        public SingleElementHandler(Browser browser, By byLocator) : base(browser, byLocator) { }
+        public SingleElementHandler(IWebDriver webDriver, By byLocator) : base(webDriver, byLocator) { }
 
         public override void WaitForVisible(int timeoutSeconds)
         {
-            WebDriverWait wait = new WebDriverWait(Browser.WebDriver, TimeSpan.FromSeconds(timeoutSeconds));
+            WebDriverWait wait = new WebDriverWait(WebDriver, TimeSpan.FromSeconds(timeoutSeconds));
             wait.Until(ExpectedConditions.ElementIsVisible(ByLocator));
         }
 
         public override void WaitForInvisible(int timeoutSeconds)
         {
-            WebDriverWait wait = new WebDriverWait(Browser.WebDriver, TimeSpan.FromSeconds(timeoutSeconds));
+            WebDriverWait wait = new WebDriverWait(WebDriver, TimeSpan.FromSeconds(timeoutSeconds));
             wait.Until(ExpectedConditions.InvisibilityOfElementLocated(ByLocator));
         }
 
         public void Hover()
         {
-            Actions action = new Actions(Browser.WebDriver);
+            Actions action = new Actions(WebDriver);
             action.MoveToElement(Element).Perform();
         }
     }

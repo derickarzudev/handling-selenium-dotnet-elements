@@ -6,7 +6,7 @@ using System;
 namespace IntegrationsTestsFramework.TestCases
 {
     [TestFixture]
-    class RemoveItemToDoList : TestCase
+    public class RemoveItemToDoList : TestCase
     {
         [Test]
         public void TestRemoveItemToDoList()
@@ -15,11 +15,11 @@ namespace IntegrationsTestsFramework.TestCases
 
             Browser.NavigateTo(toDoListPage);
 
-            CollectionElementsHandler activitiesLabelsHandler = new CollectionElementsHandler(Browser, toDoListPage.ActivitiesLabelsByLocator);
+            CollectionElementsHandler activitiesLabelsHandler = new CollectionElementsHandler(Browser.WebDriver, toDoListPage.ActivitiesLabelsByLocator);
 
             activitiesLabelsHandler.WaitForVisible(10);
 
-            CollectionElementsHandler removeActivityButtonsHandler = new CollectionElementsHandler(Browser, toDoListPage.RemoveActivityButtonsByLocator);
+            CollectionElementsHandler removeActivityButtonsHandler = new CollectionElementsHandler(Browser.WebDriver, toDoListPage.RemoveActivityButtonsByLocator);
 
             int indexOfActivityToRemove = new Random().Next(0, activitiesLabelsHandler.Elements.Count - 1);
 

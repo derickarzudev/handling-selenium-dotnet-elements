@@ -2,7 +2,7 @@
 
 namespace IntegrationsTestsFramework.TestCases
 {
-    class TestCase
+    public class TestCase
     {
         protected Browser Browser;
 
